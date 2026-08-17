@@ -547,7 +547,7 @@ function generateShareText() {
     }
 
     const modeText = gameMode === 'daily' ? `Giornaliero (${getTodayString()})` : 'Infinito';
-    return `Unwordle ITA - ${modeText}\n\n${emojiGrid}\nGioca su: https://IL_TUO_DOMINIO.it`;
+    return `Unwordle ITA - ${modeText}\n\n${emojiGrid}\nGioca su: https://alessiobaldacci12-it.github.io/unwordle-ita/`;
 }
 
 function shareResult() {
