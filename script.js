@@ -250,12 +250,9 @@ function loadDailyState(savedState) {
     
     if (savedState.isWin) {
         document.getElementById('message').textContent = "Hai già completato la sfida giornaliera con successo!";
-        vittorieLive = Math.max(vittorieLive, 1);
     } else {
         document.getElementById('message').textContent = "Hai già giocato la sfida giornaliera di oggi.";
-        reseLive = Math.max(reseLive, 1);
     }
-    aggiornaWidgetLive();
 }
 
 function resetKeyboard() {
@@ -521,10 +518,10 @@ function recordGameResult(isWin) {
         if (stats.currentStreak > stats.maxStreak) {
             stats.maxStreak = stats.currentStreak;
         }
-        registraVittoriaLive();
+        registraVittoriaLive(); // Incrementa vittorie nel widget
     } else {
         stats.currentStreak = 0;
-        registraResaLive();
+        registraResaLive(); // Incrementa rese nel widget
     }
 
     localStorage.setItem('unwordle_stats', JSON.stringify(stats));
@@ -550,7 +547,7 @@ function generateShareText() {
     }
 
     const modeText = gameMode === 'daily' ? `Giornaliero (${getTodayString()})` : 'Infinito';
-    return `Unwordle ITA - ${modeText}\n\n${emojiGrid}\nGioca su: https://alessiobaldacci12-it.github.io/unwordle-ita/`;
+    return `Unwordle ITA - ${modeText}\n\n${emojiGrid}\nGioca su: https://IL_TUO_DOMINIO.it`;
 }
 
 function shareResult() {
