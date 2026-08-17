@@ -1,0 +1,433 @@
+/* RESET E STILI DI BASE */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: #f7f9fc;
+  color: #333333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding: 10px;
+}
+
+/* CONTAINER PRINCIPALE */
+.game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 500px;
+  flex-grow: 1;
+}
+
+/* HEADER ED ELEMENTI SUPERIORI */
+header {
+  text-align: center;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+h1 {
+  font-size: 2rem;
+  color: #1a1a1a;
+  letter-spacing: 1px;
+  margin-bottom: 5px;
+}
+
+#game-subtitle {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+/* MODALITÀ DI GIOCO (Selettore) */
+.mode-selector {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.mode-btn {
+  background-color: #e0e6ed;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #555;
+}
+
+.mode-btn.active {
+  background-color: #2196f3;
+  color: white;
+  box-shadow: 0 2px 5px rgba(33, 150, 243, 0.3);
+}
+
+/* BARRA DI NAVIGAZIONE / UTILITÀ */
+.nav-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.icon-btn:hover {
+  transform: scale(1.15);
+}
+
+/* TABELLONE DI GIOCO */
+#board {
+  display: grid;
+  grid-template-rows: repeat(5, 1fr);
+  gap: 6px;
+  margin-bottom: 15px;
+  width: 100%;
+  max-width: 330px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+}
+
+.tile {
+  width: 100%;
+  aspect-ratio: 1;
+  border: 2px solid #d3d6da;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.6rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-radius: 6px;
+  user-select: none;
+  background-color: #ffffff;
+  transition: transform 0.2s ease;
+}
+
+/* COLORI INDIZI SULLE TILE */
+.tile.correct {
+  background-color: #6aaa64;
+  color: white;
+  border-color: #6aaa64;
+}
+
+.tile.present {
+  background-color: #c9b458;
+  color: white;
+  border-color: #c9b458;
+}
+
+.tile.absent {
+  background-color: #787c7e;
+  color: white;
+  border-color: #787c7e;
+}
+
+/* ANIMAZIONI TILE */
+.tile.flip {
+  animation: flip 0.5s ease forwards;
+}
+
+@keyframes flip {
+  0% { transform: rotateX(0deg); }
+  50% { transform: rotateX(90deg); }
+  100% { transform: rotateX(0deg); }
+}
+
+.row.shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-5px); }
+  40%, 80% { transform: translateX(5px); }
+}
+
+/* MESSAGGI DI GIOCO */
+#message-container {
+  min-height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+#message {
+  font-weight: 600;
+  color: #333;
+  text-align: center;
+}
+
+/* TASTIERA VIRTUALE */
+#keyboard {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: auto;
+  padding-bottom: 10px;
+}
+
+.keyboard-row {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+}
+
+.key {
+  background-color: #d3d6da;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  padding: 14px 0;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  color: #1a1a1a;
+  transition: background-color 0.2s ease;
+}
+
+.key.large {
+  flex: 1.5;
+  font-size: 0.75rem;
+}
+
+/* STATI TASTIERA */
+.key.correct {
+  background-color: #6aaa64;
+  color: white;
+}
+
+.key.present {
+  background-color: #c9b458;
+  color: white;
+}
+
+.key.absent {
+  background-color: #787c7e;
+  color: white;
+}
+
+/* PULSANTI AZIONE IN BASSO */
+.action-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  width: 100%;
+  max-width: 330px;
+}
+
+.btn {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: opacity 0.2s ease;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
+
+.btn-danger {
+  background-color: #e53935;
+  color: white;
+}
+
+.btn-success {
+  background-color: #4caf50;
+  color: white;
+}
+
+.btn-primary {
+  background-color: #2196f3;
+  color: white;
+}
+
+/* STILI MODALI / POP-UP */
+.modal {
+  display: none; 
+  position: fixed; 
+  z-index: 1000; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  background-color: rgba(0, 0, 0, 0.6); 
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background-color: #ffffff;
+  padding: 20px 25px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  box-sizing: border-box;
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.close-btn {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #888;
+}
+
+.close-btn:hover {
+  color: #000;
+}
+
+/* ELEMENTI INTERNI ALLE MODALI */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin: 20px 0;
+  text-align: center;
+}
+
+.stat-box .number {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #2196f3;
+}
+
+.stat-box .label {
+  font-size: 0.75rem;
+  color: #666;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.form-group input, 
+.form-group textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 0.9rem;
+}
+
+.paypal-btn {
+  background-color: #0070ba;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s ease;
+}
+
+.paypal-btn:hover {
+  background-color: #005ea6;
+}
+
+/* WIDGET STATISTICHE LIVE (IN BASSO A DESTRA) */
+.live-stats-widget {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  background-color: #ffffff;
+  color: #1a1a1a;
+  padding: 10px 14px;
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  border: 1px solid #e0e6ed;
+  font-size: 0.8rem;
+  z-index: 900;
+  min-width: 150px;
+}
+
+.live-stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+
+.live-stat-row:last-child {
+  margin-bottom: 0;
+}
+
+.live-stat-label {
+  color: #666666;
+  font-weight: 500;
+}
+
+.live-stat-value {
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: #1a1a1a;
+}
+
+.text-green {
+  color: #6aaa64;
+}
+
+.text-red {
+  color: #e53935;
+}
+
+@media (max-width: 600px) {
+  .live-stats-widget {
+    font-size: 0.75rem;
+    padding: 8px 10px;
+    bottom: 10px;
+    right: 10px;
+    min-width: 130px;
+  }
+}

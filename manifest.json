@@ -1,0 +1,18 @@
+{
+  "name": "Unwordle ITA",
+  "short_name": "Unwordle",
+  "description": "Il gioco di logica e parole al contrario.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f7f9fc",
+  "theme_color": "#2196f3",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

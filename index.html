@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <!-- Favicon e Icona Desktop/Mobile via SVG -->
+  <link rel="icon" type="image/svg+xml" href="icon.svg">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <meta name="theme-color" content="#f7f9fc">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unwordle ITA - Il gioco di logica al contrario</title>
+
+  <!-- Meta Tag Social / Open Graph -->
+  <meta property="og:title" content="Unwordle ITA - Il gioco di logica al contrario">
+  <meta property="og:description" content="Ricostruisci la griglia del giorno o gioca in modalità infinita!">
+  <meta property="og:image" content="https://IL_TUO_DOMINIO.it/preview.png">
+  <meta property="og:url" content="https://IL_TUO_DOMINIO.it">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="game-container">
+    <header>
+      <h1>UNWORDLE ITA</h1>
+      <p id="game-subtitle">Ricostruisci la griglia del giorno!</p>
+
+      <div class="mode-selector">
+        <button id="mode-daily" class="mode-btn active">Giornaliero</button>
+        <button id="mode-unlimited" class="mode-btn">Infinito</button>
+      </div>
+
+      <div class="nav-buttons">
+        <button id="stats-btn" class="icon-btn" title="Statistiche">📊</button>
+        <button id="report-btn" class="icon-btn" title="Segnala Parola">🚩</button>
+        <button id="donate-btn" class="icon-btn" title="Offri un caffè">☕</button>
+      </div>
+    </header>
+
+    <!-- Tabellone 5x5 -->
+    <div id="board">
+      <div class="row">
+        <div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div>
+      </div>
+      <div class="row">
+        <div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div>
+      </div>
+      <div class="row">
+        <div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div>
+      </div>
+      <div class="row">
+        <div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div>
+      </div>
+      <div class="row">
+        <div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div>
+      </div>
+    </div>
+
+    <div id="message-container">
+      <p id="message"></p>
+    </div>
+
+    <!-- Pulsanti Azione -->
+    <div class="action-buttons">
+      <button id="giveup-btn" class="btn btn-danger">MI ARRENDO</button>
+      <button id="restart-btn" class="btn btn-primary" style="display: none;">NUOVA PARTITA</button>
+      <button id="share-btn" class="btn btn-success" style="display: none;">📋 CONDIVIDI</button>
+    </div>
+
+    <!-- Tastiera Virtuale -->
+    <div id="keyboard">
+      <div class="keyboard-row">
+        <button class="key" data-key="Q">Q</button>
+        <button class="key" data-key="W">W</button>
+        <button class="key" data-key="E">E</button>
+        <button class="key" data-key="R">R</button>
+        <button class="key" data-key="T">T</button>
+        <button class="key" data-key="Y">Y</button>
+        <button class="key" data-key="U">U</button>
+        <button class="key" data-key="I">I</button>
+        <button class="key" data-key="O">O</button>
+        <button class="key" data-key="P">P</button>
+      </div>
+      <div class="keyboard-row">
+        <button class="key" data-key="A">A</button>
+        <button class="key" data-key="S">S</button>
+        <button class="key" data-key="D">D</button>
+        <button class="key" data-key="F">F</button>
+        <button class="key" data-key="G">G</button>
+        <button class="key" data-key="H">H</button>
+        <button class="key" data-key="J">J</button>
+        <button class="key" data-key="K">K</button>
+        <button class="key" data-key="L">L</button>
+      </div>
+      <div class="keyboard-row">
+        <button class="key large" data-key="ENTER">INVIO</button>
+        <button class="key" data-key="Z">Z</button>
+        <button class="key" data-key="X">X</button>
+        <button class="key" data-key="C">C</button>
+        <button class="key" data-key="V">V</button>
+        <button class="key" data-key="B">B</button>
+        <button class="key" data-key="N">N</button>
+        <button class="key" data-key="M">M</button>
+        <button class="key large" data-key="BACKSPACE">⌫</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODALE REGOLE -->
+  <div id="rules-modal" class="modal">
+    <div class="modal-content" style="text-align: left;">
+      <span id="close-rules-modal" class="close-btn">&times;</span>
+      <h2 style="text-align: center; margin-bottom: 15px;">🧩 Come si gioca?</h2>
+
+      <p style="margin-bottom: 12px; line-height: 1.4;">
+        In <strong>Unwordle ITA</strong> giochi al contrario: <strong>la parola finale è già svelata</strong> in fondo, mentre la griglia sopra mostra i colori degli indizi.
+      </p>
+
+      <div style="margin-bottom: 15px;">
+        <p><strong>Il tuo obiettivo:</strong></p>
+        <ul style="padding-left: 20px; line-height: 1.5; margin-top: 5px;">
+          <li>Inserisci le parole dal basso verso l'alto.</li>
+          <li>Ogni parola deve rispettare <strong>esattamente i colori</strong> della griglia rispetto alla parola finale.</li>
+        </ul>
+      </div>
+
+      <div style="margin-bottom: 20px;">
+        <p><strong>Legenda Colori:</strong></p>
+        <p>🟩 <strong>Verde:</strong> Lettera nella posizione corretta.</p>
+        <p>🟨 <strong>Giallo:</strong> Lettera presente ma in posizione sbagliata.</p>
+        <p>⬛ <strong>Grigio:</strong> Lettera non presente nella parola finale.</p>
+      </div>
+
+      <button id="start-game-btn" class="paypal-btn" style="width: 100%;">🎮 Ho capito, Gioca!</button>
+    </div>
+  </div>
+
+  <!-- MODALE STATISTICHE -->
+  <div id="stats-modal" class="modal">
+    <div class="modal-content">
+      <span id="close-stats-modal" class="close-btn">&times;</span>
+      <h2>📊 Le tue Statistiche</h2>
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div id="stat-played" class="number">0</div>
+          <div class="label">Giocate</div>
+        </div>
+        <div class="stat-box">
+          <div id="stat-winrate" class="number">0%</div>
+          <div class="label">Vittorie</div>
+        </div>
+        <div class="stat-box">
+          <div id="stat-streak" class="number">0</div>
+          <div class="label">Serie Attuale</div>
+        </div>
+        <div class="stat-box">
+          <div id="stat-max-streak" class="number">0</div>
+          <div class="label">Serie Max</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODALE SEGNALAZIONI -->
+  <div id="report-modal" class="modal">
+    <div class="modal-content">
+      <span id="close-report-modal" class="close-btn">&times;</span>
+      <h2>🚩 Segnala una Parola</h2>
+      <form id="report-form" style="margin-top: 15px;">
+        <div class="form-group">
+          <label>Tipo di segnalazione:</label>
+          <div style="display: flex; gap: 15px; margin-top: 5px;">
+            <label style="font-weight: normal;"><input type="radio" name="reportType" value="add" checked> Parola Mancante</label>
+            <label style="font-weight: normal;"><input type="radio" name="reportType" value="remove"> Parola Errata</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="report-word">Parola (5 lettere):</label>
+          <input type="text" id="report-word" maxlength="5" required style="text-transform: uppercase;">
+        </div>
+        <div class="form-group">
+          <label for="report-notes">Note / Definizione (opzionale):</label>
+          <textarea id="report-notes" rows="3"></textarea>
+        </div>
+        <button type="submit" class="paypal-btn" style="width: 100%;">Invia Segnalazione</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODALE DONAZIONI -->
+  <div id="donate-modal" class="modal">
+    <div class="modal-content">
+      <span id="close-donate-modal" class="close-btn">&times;</span>
+      <h2>☕ Ti piace Unwordle ITA?</h2>
+      <p style="margin: 15px 0; line-height: 1.4;">
+        Il gioco è 100% gratuito e senza pubblicità. Se ti va di sostenere il progetto e offrire un caffè allo sviluppatore, puoi fare una donazione libera! ❤️
+      </p>
+      <div style="margin-top: 20px;">
+        <a href="https://paypal.me/AlessioBaldacci" target="_blank" class="paypal-btn" style="text-decoration: none; display: block; text-align: center;">
+          💙 Offri un caffè su PayPal
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- WIDGET STATISTICHE IN BASSO A DESTRA -->
+  <div class="live-stats-widget">
+    <div class="live-stat-row">
+      <span class="live-stat-label">Giocatori unici:</span>
+      <span id="live-stat-totali" class="live-stat-value">0</span>
+    </div>
+    <div class="live-stat-row">
+      <span class="live-stat-label">Vittorie:</span>
+      <span id="live-stat-vittorie" class="live-stat-value text-green">0</span>
+    </div>
+    <div class="live-stat-row">
+      <span class="live-stat-label">Rese:</span>
+      <span id="live-stat-rese" class="live-stat-value text-red">0</span>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
