@@ -48,9 +48,9 @@ function registraResaLive() {
 giocatoriUnici.add(getPlayerID());
 
 const CLUE_LIMITS = {
-  0: { min: 0, max: 1 },
-  1: { min: 1, max: 2 },
-  2: { min: 2, max: 3 },
+  0: { min: 2, max: 2 },
+  1: { min: 2, max: 3 },
+  2: { min: 3, max: 3 },
   3: { min: 3, max: 4 }
 };
 

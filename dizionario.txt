@@ -98,8 +98,6 @@ adono
 adora
 adori
 adoro
-adoxa
-adoxe
 adula
 aduli
 adulo
@@ -147,7 +145,6 @@ agate
 agave
 agavi
 aggio
-agiai
 agile
 agili
 agino
@@ -346,7 +343,6 @@ annua
 annue
 annui
 annuo
-anobi
 anodi
 anodo
 anona
@@ -1962,22 +1958,7 @@ dioli
 diolo
 diosi
 dipoi
-dirai
-dirci
-direi
-dirla
-dirle
-dirli
-dirlo
-dirmi
-dirne
-dirsi
-dirti
-dirvi
 disco
-disfa
-disfi
-disfo
 disia
 disii
 disio
